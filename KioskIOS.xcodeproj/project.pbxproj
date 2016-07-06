@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D06ED9181D2DA2420061C8BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06ED9171D2DA2420061C8BF /* SettingsViewController.swift */; };
 		D06ED91A1D2DA25A0061C8BF /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06ED9191D2DA25A0061C8BF /* PaymentViewController.swift */; };
+		D06ED91C1D2DA6EC0061C8BF /* ShopArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06ED91B1D2DA6EC0061C8BF /* ShopArticleViewController.swift */; };
+		D06ED91E1D2DA81E0061C8BF /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06ED91D1D2DA81E0061C8BF /* Database.swift */; };
 		D0F8FDB71D2D7C3B0070413A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8FDB61D2D7C3B0070413A /* AppDelegate.swift */; };
 		D0F8FDB91D2D7C3B0070413A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F8FDB81D2D7C3B0070413A /* ViewController.swift */; };
 		D0F8FDBC1D2D7C3B0070413A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D0F8FDBA1D2D7C3B0070413A /* Main.storyboard */; };
@@ -22,6 +24,8 @@
 /* Begin PBXFileReference section */
 		D06ED9171D2DA2420061C8BF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D06ED9191D2DA25A0061C8BF /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
+		D06ED91B1D2DA6EC0061C8BF /* ShopArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopArticleViewController.swift; sourceTree = "<group>"; };
+		D06ED91D1D2DA81E0061C8BF /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		D0F8FDB31D2D7C3B0070413A /* KioskIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KioskIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0F8FDB61D2D7C3B0070413A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0F8FDB81D2D7C3B0070413A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -64,17 +68,19 @@
 		D0F8FDB51D2D7C3B0070413A /* KioskIOS */ = {
 			isa = PBXGroup;
 			children = (
-				D0F8FDED1D2D9CA70070413A /* ShopCustomerViewController.swift */,
 				D0F8FDB61D2D7C3B0070413A /* AppDelegate.swift */,
-				D0F8FDB81D2D7C3B0070413A /* ViewController.swift */,
-				D0F8FDBA1D2D7C3B0070413A /* Main.storyboard */,
 				D0F8FDC01D2D7C3B0070413A /* Assets.xcassets */,
-				D0F8FDC21D2D7C3B0070413A /* LaunchScreen.storyboard */,
 				D0F8FDC51D2D7C3B0070413A /* Info.plist */,
 				D0F8FDBD1D2D7C3B0070413A /* KioskIOS.xcdatamodeld */,
-				D0F8FDEB1D2D8C5B0070413A /* ShopViewController.swift */,
-				D06ED9171D2DA2420061C8BF /* SettingsViewController.swift */,
+				D0F8FDC21D2D7C3B0070413A /* LaunchScreen.storyboard */,
+				D0F8FDBA1D2D7C3B0070413A /* Main.storyboard */,
 				D06ED9191D2DA25A0061C8BF /* PaymentViewController.swift */,
+				D06ED9171D2DA2420061C8BF /* SettingsViewController.swift */,
+				D06ED91B1D2DA6EC0061C8BF /* ShopArticleViewController.swift */,
+				D0F8FDED1D2D9CA70070413A /* ShopCustomerViewController.swift */,
+				D0F8FDEB1D2D8C5B0070413A /* ShopViewController.swift */,
+				D0F8FDB81D2D7C3B0070413A /* ViewController.swift */,
+				D06ED91D1D2DA81E0061C8BF /* Database.swift */,
 			);
 			path = KioskIOS;
 			sourceTree = "<group>";
@@ -156,7 +162,9 @@
 				D0F8FDB71D2D7C3B0070413A /* AppDelegate.swift in Sources */,
 				D0F8FDEE1D2D9CA70070413A /* ShopCustomerViewController.swift in Sources */,
 				D0F8FDBF1D2D7C3B0070413A /* KioskIOS.xcdatamodeld in Sources */,
+				D06ED91E1D2DA81E0061C8BF /* Database.swift in Sources */,
 				D06ED9181D2DA2420061C8BF /* SettingsViewController.swift in Sources */,
+				D06ED91C1D2DA6EC0061C8BF /* ShopArticleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

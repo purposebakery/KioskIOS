@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="xd5-RQ-6o6">
             <objects>
-                <viewController id="1XR-OQ-hnW" sceneMemberID="viewController">
+                <viewController id="1XR-OQ-hnW" customClass="SettingsViewController" customModule="KioskIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gHL-vS-1cy"/>
                         <viewControllerLayoutGuide type="bottom" id="E9h-YB-3Mu"/>
@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="1484" y="-466"/>
         </scene>
-        <!--View Controller-->
+        <!--Payment View Controller-->
         <scene sceneID="kDU-Vr-eA4">
             <objects>
-                <viewController id="uxn-rr-Lmb" sceneMemberID="viewController">
+                <viewController id="uxn-rr-Lmb" customClass="PaymentViewController" customModule="KioskIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DKy-ID-wAF"/>
                         <viewControllerLayoutGuide type="bottom" id="cJe-Ef-EIF"/>
@@ -144,10 +144,10 @@
             </objects>
             <point key="canvasLocation" x="2464" y="-1979"/>
         </scene>
-        <!--View Controller-->
+        <!--Shop Article View Controller-->
         <scene sceneID="i61-bN-F0O">
             <objects>
-                <viewController id="MDh-Cm-Gdy" sceneMemberID="viewController">
+                <viewController id="MDh-Cm-Gdy" customClass="ShopArticleViewController" customModule="KioskIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Q4B-sx-ZvE"/>
                         <viewControllerLayoutGuide type="bottom" id="ZGH-fW-A6r"/>

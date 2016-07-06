@@ -12,6 +12,7 @@ class ShopCustomerViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var customerTable: UITableView!
     
+    /*
     struct Customer {
         let id: String
         let name: String
@@ -22,6 +23,9 @@ class ShopCustomerViewController: UIViewController, UITableViewDataSource, UITab
         Customer(id: "671923712093", name: "Oliver"),
         Customer(id: "0987623329", name: "Thomas")
         ]
+    */
+    
+    var customers: [Database.Customer] = []
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -31,10 +35,17 @@ class ShopCustomerViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadData()
+        
         customerTable.dataSource = self
         customerTable.delegate = self
         customerTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+    }
+
+    func loadData() {
+        customers.removeAll();
+        customers.appendContentsOf(Database.loadCustomers())
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

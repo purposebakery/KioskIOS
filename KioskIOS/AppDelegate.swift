@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        Database.saveCustomer("Oliver", id: "56789765", email:"oliver.metz@bertelsmann.de")
         // Override point for customization after application launch.
         return true
     }
