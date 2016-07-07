@@ -141,7 +141,7 @@
         <!--Shop Customer View Controller-->
         <scene sceneID="aDQ-5V-ALs">
             <objects>
-                <viewController id="Y9l-Wl-BQz" customClass="ShopCustomerViewController" customModule="KioskIOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y9l-Wl-BQz" customClass="ShopCustomerViewController" customModule="KioskIOS" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rBZ-Yp-MbC"/>
                         <viewControllerLayoutGuide type="bottom" id="FPT-ws-832"/>
@@ -177,7 +177,7 @@
                     </view>
                     <connections>
                         <outlet property="customerTable" destination="aGp-qA-1h8" id="j5g-c7-org"/>
-                        <segue destination="Uq9-wt-55S" kind="show" identifier="initDelegatesCustomer" animates="NO" id="zLq-df-Hbj"/>
+                        <segue destination="Uq9-wt-55S" kind="show" identifier="initDelegatesCustomer" animates="NO" id="HT7-RT-pIS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nn6-t1-piw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -309,6 +309,6 @@
         <image name="ic_shopping_cart" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zLq-df-Hbj"/>
+        <segue reference="HT7-RT-pIS"/>
     </inferredMetricsTieBreakers>
 </document>

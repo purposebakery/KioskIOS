@@ -35,6 +35,7 @@ class ShopViewController: UIViewController, CustomerSelectedDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        print("prepareForSegue")
         if segue.identifier == "initDelegatesCustomer" {
             print("prepareForSegue: initDelegatesCustomer")
             let customerViewController = segue.destinationViewController as! ShopCustomerViewController
