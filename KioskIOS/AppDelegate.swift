@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Database.saveCustomer("Oliver", id: "56789765", email:"oliver.metz@bertelsmann.de")
         // Override point for customization after application launch.
+        
+        Database.saveArticle("Snickers", id: "456786", price: 0.3)
+        Database.saveArticle("Mars", id: "12312", price: 0.2)
+        Database.saveArticle("Apple", id: "53", price: 0.1)
+        Database.saveArticle("Banana", id: "512333", price: 0.25)
         return true
     }
 

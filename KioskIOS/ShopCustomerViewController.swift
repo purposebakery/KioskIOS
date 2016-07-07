@@ -10,6 +10,7 @@ import UIKit
 
 class ShopCustomerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    weak var delegate: CustomerSelectedDelegate? = nil
     @IBOutlet weak var customerTable: UITableView!
     
     /*
@@ -35,17 +36,19 @@ class ShopCustomerViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadData()
+        performSegueWithIdentifier("initDelegatesCustomer", sender: self)
         
         customerTable.dataSource = self
         customerTable.delegate = self
         customerTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
+        loadData()
     }
 
     func loadData() {
         customers.removeAll();
         customers.appendContentsOf(Database.loadCustomers())
+        customerTable.reloadData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,7 +102,9 @@ class ShopCustomerViewController: UIViewController, UITableViewDataSource, UITab
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("did select:      \(indexPath.row)  ")
+        
+        let customer = customers[indexPath.row]
+        delegate?.customerSelected(customer)
     }
 }
 

@@ -17,6 +17,12 @@ class Database {
         let email: String
     }
     
+    struct Article {
+        let id: String
+        let name: String
+        let price: Float
+    }
+    
     static func saveCustomer(name: String, id: String, email: String) {
         
         let appDelegate =
@@ -75,5 +81,66 @@ class Database {
         }
         
         return customers
+    }
+    
+    
+    static func saveArticle(name: String, id: String, price: Float) {
+        
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity =  NSEntityDescription.entityForName("Article",
+                                                        inManagedObjectContext:managedContext)
+        
+        let article = NSManagedObject(entity: entity!,
+                                       insertIntoManagedObjectContext: managedContext)
+        
+        article.setValue(name, forKey: "name")
+        article.setValue(id, forKey: "id")
+        article.setValue(price, forKey: "price")
+        
+        do {
+            try managedContext.save()
+            
+            print("saveArticle \(name)")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func loadArticles() -> [Article] {
+        
+        var articles:[Article] = []
+        
+        //1
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        //2
+        let fetchRequest = NSFetchRequest(entityName: "Article")
+        
+        //3
+        do {
+            let results =
+                try managedContext.executeFetchRequest(fetchRequest)
+            let articleObjects = results as! [NSManagedObject]
+            
+            for articleObject in articleObjects {
+                let name = articleObject.valueForKey("name") as? String
+                let id = articleObject.valueForKey("id") as? String
+                let price = articleObject.valueForKey("price") as? Float
+                
+                articles.append(Article(id:id!, name:name!, price:price!))
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        return articles
     }
 }

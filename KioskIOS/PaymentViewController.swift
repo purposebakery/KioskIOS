@@ -18,6 +18,6 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Payment"
+        //self.navigationItem.title = "Payment"
     }
 }

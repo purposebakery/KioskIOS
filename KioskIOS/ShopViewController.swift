@@ -8,7 +8,16 @@
 
 import UIKit
 
-class ShopViewController: UIViewController {
+protocol CustomerSelectedDelegate: class {
+    func customerSelected(customer: Database.Customer)
+}
+
+class ShopViewController: UIViewController, CustomerSelectedDelegate {
+    
+    
+    @IBOutlet weak var customerContainer: UIView!
+    @IBOutlet weak var articleContainer: UIView!
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -18,7 +27,32 @@ class ShopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Shop"
+        customerContainer.hidden = true
+        articleContainer.hidden = false
+        
+        //self.navigationItem.title = "Shop"
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "initDelegatesCustomer" {
+            print("prepareForSegue: initDelegatesCustomer")
+            let customerViewController = segue.destinationViewController as! ShopCustomerViewController
+            customerViewController.delegate = self
+        }
+    }
+    
+    func toggleViewVisibility() {
+        customerContainer.hidden = !customerContainer.hidden
+        
+        articleContainer.hidden = !articleContainer.hidden
+    }
+    
+    func customerSelected(customer: Database.Customer) {
+    
+        print("did select: \(customer.name)")
+        
+        toggleViewVisibility()
     }
 }
 
