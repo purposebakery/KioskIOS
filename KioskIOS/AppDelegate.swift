@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         Database.saveCustomer("Oliver", id: "56789765", email:"oliver.metz@bertelsmann.de")
+        Database.saveCustomer("Here comes one really really really long name that should fold the cell", id: "56789765", email:"oliver.metz@bertelsmann.de")
         // Override point for customization after application launch.
         
         Database.saveArticle("Snickers", id: "456786", price: 0.3)
