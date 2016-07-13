@@ -16,15 +16,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        Database.saveCustomer("Oliver", id: "56789765", email:"oliver.metz@bertelsmann.de")
-        Database.saveCustomer("Here comes one really really really long name that should fold the cell", id: "56789765", email:"oliver.metz@bertelsmann.de")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let initedDatabase = defaults.boolForKey("initedDatabase")
+        if (!initedDatabase) {
+            defaults.setBool(true, forKey: "initedDatabase")
+            initDatabase()
+        }
+        
+        return true
+    }
+    
+    func initDatabase() {
+        Database.saveCustomer("Oliver", id: "100", email:"oliver.metz@bertelsmann.de")
+        Database.saveCustomer("Robert", id: "101", email:"robert.strickmann@bertelsmann.de")
+        Database.saveCustomer("Thomas", id: "102", email:"thomas.hanning@bertelsmann.de")
+        Database.saveCustomer("Johannes", id: "103", email:"johannes.kleeschulte@bertelsmann.de")
+        Database.saveCustomer("Willem", id: "104", email:"willem.terhoerst@bertelsmann.de")
         // Override point for customization after application launch.
         
-        Database.saveArticle("Snickers", id: "456786", price: 0.3)
-        Database.saveArticle("Mars", id: "12312", price: 0.2)
-        Database.saveArticle("Apple", id: "53", price: 0.1)
-        Database.saveArticle("Banana", id: "512333", price: 0.25)
-        return true
+        Database.saveArticle("Snickers", id: "1000", price: 0.3)
+        Database.saveArticle("Mars", id: "1001", price: 0.2)
+        Database.saveArticle("Apple", id: "2001", price: 0.1)
+        Database.saveArticle("Banana", id: "2002", price: 0.25)
     }
 
     func applicationWillResignActive(application: UIApplication) {
