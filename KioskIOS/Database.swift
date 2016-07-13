@@ -20,7 +20,34 @@ class Database {
     struct Article {
         let id: String
         let name: String
-        let price: Float
+        let price: Int
+    }
+    
+    static func savePurchase(customer: Customer, article: Article) {
+        
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let entity =  NSEntityDescription.entityForName("Purchase",
+                                                        inManagedObjectContext:managedContext)
+        
+        let purchase = NSManagedObject(entity: entity!,
+                                       insertIntoManagedObjectContext: managedContext)
+        
+        let date = NSDate()
+        
+        purchase.setValue(date, forKey:"timestamp")
+        purchase.setValue(article.price, forKey: "value")
+        
+        do {
+            try managedContext.save()
+            
+            //print("saveCustomer \(name)")
+        } catch let error as NSError  {
+            print("Could not save \(error), \(error.userInfo)")
+        }
     }
     
     static func saveCustomer(name: String, id: String, email: String) {
@@ -84,7 +111,7 @@ class Database {
     }
     
     
-    static func saveArticle(name: String, id: String, price: Float) {
+    static func saveArticle(name: String, id: String, price: Int) {
         
         let appDelegate =
             UIApplication.sharedApplication().delegate as! AppDelegate
@@ -132,7 +159,7 @@ class Database {
             for articleObject in articleObjects {
                 let name = articleObject.valueForKey("name") as? String
                 let id = articleObject.valueForKey("id") as? String
-                let price = articleObject.valueForKey("price") as? Float
+                let price = articleObject.valueForKey("price") as? Int
                 
                 articles.append(Article(id:id!, name:name!, price:price!))
             }
