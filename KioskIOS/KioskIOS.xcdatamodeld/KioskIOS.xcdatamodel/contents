@@ -11,14 +11,16 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Purchase" syncable="YES">
+        <attribute name="articleId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="articleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="customerId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="customerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="article" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Article" syncable="YES"/>
-        <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Customer" syncable="YES"/>
     </entity>
     <elements>
         <element name="Article" positionX="-234" positionY="-81" width="128" height="90"/>
         <element name="Customer" positionX="-515" positionY="-72" width="128" height="88"/>
-        <element name="Purchase" positionX="-369" positionY="81" width="128" height="105"/>
+        <element name="Purchase" positionX="-369" positionY="81" width="128" height="135"/>
     </elements>
 </model>

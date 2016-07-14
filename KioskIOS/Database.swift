@@ -40,6 +40,10 @@ class Database {
         
         purchase.setValue(date, forKey:"timestamp")
         purchase.setValue(article.price, forKey: "value")
+        purchase.setValue(customer.name, forKey: "customerName")
+        purchase.setValue(customer.id, forKey: "customerId")
+        purchase.setValue(article.name, forKey: "articleName")
+        purchase.setValue(article.id, forKey: "articleId")
         
         do {
             try managedContext.save()

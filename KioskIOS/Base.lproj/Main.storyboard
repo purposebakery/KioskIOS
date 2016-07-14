@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Settings-->
+        <!--Purchases-->
         <scene sceneID="xd5-RQ-6o6">
             <objects>
-                <viewController id="1XR-OQ-hnW" customClass="SettingsViewController" customModule="KioskIOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Purchases" id="1XR-OQ-hnW" customClass="PurchasesViewController" customModule="KioskIOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gHL-vS-1cy"/>
                         <viewControllerLayoutGuide type="bottom" id="E9h-YB-3Mu"/>
@@ -21,9 +21,12 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="x4w-Qd-dZE">
                                 <rect key="frame" x="20" y="10" width="560" height="29"/>
                                 <segments>
-                                    <segment title="Customers"/>
-                                    <segment title="Articles"/>
+                                    <segment title="Summary"/>
+                                    <segment title="History"/>
                                 </segments>
+                                <connections>
+                                    <action selector="indexChanged:" destination="1XR-OQ-hnW" eventType="valueChanged" id="Q8d-oJ-Mv1"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Eh5-us-GOG">
                                 <rect key="frame" x="20" y="48" width="560" height="439"/>
@@ -33,7 +36,7 @@
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t8F-5Z-Vrd" id="rSh-FO-XSX">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8J-Dt-CO0">
@@ -59,7 +62,7 @@
                             <constraint firstAttribute="trailing" secondItem="x4w-Qd-dZE" secondAttribute="trailing" constant="20" id="uWx-s8-1An"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="dPx-gT-YRE"/>
+                    <navigationItem key="navigationItem" title="Purchases" id="dPx-gT-YRE"/>
                     <connections>
                         <outlet property="itemTableView" destination="Eh5-us-GOG" id="0ta-cN-Bdh"/>
                         <outlet property="segmentControl" destination="x4w-Qd-dZE" id="stl-nk-57E"/>
@@ -80,6 +83,15 @@
                     <view key="view" contentMode="scaleToFill" id="PFN-bv-c7P">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XxH-AA-pLe">
+                                <rect key="frame" x="20" y="72" width="560" height="471"/>
+                                <state key="normal" title="Trigger Payment"/>
+                                <connections>
+                                    <action selector="buttonpressed:" destination="uxn-rr-Lmb" eventType="touchUpInside" id="p1m-Dz-VXH"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Payment" id="nxb-Us-jAx"/>
@@ -89,7 +101,7 @@
             </objects>
             <point key="canvasLocation" x="1477" y="296"/>
         </scene>
-        <!--Shop-->
+        <!--Kiosk Peaches-->
         <scene sceneID="zVK-4t-XRz">
             <objects>
                 <viewController id="Uq9-wt-55S" customClass="ShopViewController" customModule="KioskIOS" sceneMemberID="viewController">
@@ -115,11 +127,11 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ouv-Mq-WwY" id="GDa-EI-TEH">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyc-Qi-The">
-                                                    <rect key="frame" x="8" y="0.0" width="584" height="35.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="584" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -141,7 +153,7 @@
                             <constraint firstItem="r26-nH-ha5" firstAttribute="top" secondItem="TDZ-S1-5ta" secondAttribute="bottom" id="mfQ-vo-toT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Shop" id="73u-a3-zQv"/>
+                    <navigationItem key="navigationItem" title="Kiosk Peaches" id="73u-a3-zQv"/>
                     <connections>
                         <outlet property="camera" destination="r26-nH-ha5" id="K0s-YU-w9h"/>
                         <outlet property="table" destination="TDZ-S1-5ta" id="Euh-t8-7hL"/>
@@ -189,11 +201,11 @@
             </objects>
             <point key="canvasLocation" x="665" y="-1149"/>
         </scene>
-        <!--Settings-->
+        <!--Purchases-->
         <scene sceneID="L1z-nM-B1m">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cpf-qd-EZ9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" image="ic_settings" id="9et-Ld-vjh"/>
+                    <tabBarItem key="tabBarItem" title="Purchases" image="ic_account" id="9et-Ld-vjh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="REv-80-qcT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -229,8 +241,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ic_account" width="24" height="24"/>
         <image name="ic_euro_symbol" width="24" height="24"/>
-        <image name="ic_settings" width="24" height="24"/>
         <image name="ic_shopping_cart" width="24" height="24"/>
     </resources>
 </document>
