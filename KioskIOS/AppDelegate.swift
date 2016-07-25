@@ -28,8 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initDatabase() {
-        //Database.saveCustomer("Oliver", id: "2000024972909", email:"oliver.metz@bertelsmann.de")
-        Database.saveCustomer("Robert", id: "101", email:"robert.strickmann@bertelsmann.de")
+        Database.saveCustomer("Oliver", id: "2000024972909", email:"oliver.metz@bertelsmann.de")
+        Database.saveCustomer("Robert", id: "2000024972901", email:"robert.strickmann@bertelsmann.de")
         Database.saveCustomer("Thomas", id: "102", email:"thomas.hanning@bertelsmann.de")
         Database.saveCustomer("Johannes", id: "103", email:"johannes.kleeschulte@bertelsmann.de")
         Database.saveCustomer("Willem", id: "104", email:"willem.terhoerst@bertelsmann.de")

@@ -87,7 +87,6 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func backButtonPressed(sender: UIBarButtonItem) {
-        AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
         currentCustomer = nil
         self.navigationItem.leftBarButtonItem = nil
         loadData()
@@ -118,10 +117,12 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if (currentCustomer != nil) {
             let article = articles[indexPath.row]
-            cell.textLabel?.text = "" + String(article.price) + " cent - " + article.name
+            cell.detailTextLabel?.text = String(format: "%.2f", Float(article.price) / 100.0) + "€"
+            cell.textLabel?.text = article.name
         } else {
             let customer = customers[indexPath.row]
             cell.textLabel?.text = customer.name
+            cell.detailTextLabel?.text = ""
         }
         
         return cell
@@ -144,15 +145,18 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         table.reloadData()
     }
-
-    
     
     func runCameraSession() {
         
         do {
             captureSession = AVCaptureSession()
             
-            let videoCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+            //let videoCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+            let videoCaptureDevice = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+                .map { $0 as! AVCaptureDevice }
+                .filter { $0.position == .Front}
+                .first!
+            
             let videoInput: AVCaptureDeviceInput
             
             do {
@@ -187,11 +191,15 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             let bounds = self.camera.bounds
             previewLayer.bounds = bounds
-            previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-            previewLayer.position = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds))
+            //previewLayer.bounds = CGRect(0,y:0,width:200,height:200)
+            previewLayer.videoGravity = AVLayerVideoGravityResizeAspect
+            previewLayer.position = CGPointMake(bounds.width / 4, bounds.height/2)//CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds))
             self.camera.layer.addSublayer(previewLayer!)
             
             captureSession.startRunning();
+            
+            
+            //videoCaptureDevice.videoZoomFactor = 1.0
         } catch {
             
         }

@@ -23,6 +23,15 @@ class Database {
         let price: Int
     }
     
+    struct Purchase {
+        let timestamp: NSDate
+        let value: Int
+        let customerName: String
+        let customerId: String
+        let articleName: String
+        let articleId: String
+    }
+    
     static func savePurchase(customer: Customer, article: Article) {
         
         let appDelegate =
@@ -53,6 +62,61 @@ class Database {
             print("Could not save \(error), \(error.userInfo)")
         }
     }
+    
+    
+    static func clearPurchases() {
+        let fetchRequest = NSFetchRequest(entityName: "Purchase")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            let appDelegate =
+                UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            let managedContext = appDelegate.managedObjectContext
+            try managedContext.executeRequest(deleteRequest)
+        } catch let error as NSError {
+            print(error.description)
+            // TODO: handle the error
+        }
+    
+    }
+    
+    static func loadPurchases() -> [Purchase] {
+        
+        var purchases:[Purchase] = []
+        
+        //1
+        let appDelegate =
+            UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        //2
+        let fetchRequest = NSFetchRequest(entityName: "Purchase")
+        
+        //3
+        do {
+            let results =
+                try managedContext.executeFetchRequest(fetchRequest)
+            let purchaseObjects = results as! [NSManagedObject]
+            
+            for purchaseObject in purchaseObjects {
+                let timestamp = purchaseObject.valueForKey("timestamp") as? NSDate
+                let value = purchaseObject.valueForKey("value") as? Int
+                let customerName = purchaseObject.valueForKey("customerName") as? String
+                let customerId = purchaseObject.valueForKey("customerId") as? String
+                let articleName = purchaseObject.valueForKey("articleName") as? String
+                let articleId = purchaseObject.valueForKey("articleId") as? String
+                purchases.append(Purchase(timestamp:timestamp!, value:value!, customerName:customerName!, customerId:customerId!, articleName:articleName!, articleId:articleId!))
+            }
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
+        
+        return purchases
+    }
+
     
     static func saveCustomer(name: String, id: String, email: String) {
         
