@@ -72,7 +72,7 @@ class PaymentViewController: UIViewController, MFMailComposeViewControllerDelega
         let mailComposeViewController = MFMailComposeViewController()
         mailComposeViewController.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
-        mailComposeViewController.setToRecipients(["kioskpeaches@gmail.com", "ometz@posteo.de"])
+        mailComposeViewController.setToRecipients(["kioskpeaches@gmail.com"])
         mailComposeViewController.setSubject("Kiosk Peaches Payment")
         mailComposeViewController.setMessageBody(message + "\n\nCustomers:\n" + customers + "\n\nPurchases:\n" + purchaseSummary, isHTML: false)
         
@@ -139,7 +139,7 @@ class PaymentViewController: UIViewController, MFMailComposeViewControllerDelega
         let mailComposeViewController = MFMailComposeViewController()
         mailComposeViewController.mailComposeDelegate = self // Extremely important to set the --mailComposeDelegate-- property, NOT the --delegate-- property
         
-        mailComposeViewController.setToRecipients([email])
+        mailComposeViewController.setToRecipients([email, "kioskpeaches@gmail.com"])
         mailComposeViewController.setSubject("Kiosk Peaches Payment - " + name)
         mailComposeViewController.setMessageBody("Hallo " + name + ",\n\nfolgender Betrag muss beglichen werden: " + value + "€.\n\nBitte in Bar bei mir vorbeibringen oder via Paypal abwickeln:\nhttps://www.paypal.me/OliverMetz/" + value, isHTML: false)
         mailComposeViewController.mailComposeDelegate = self
