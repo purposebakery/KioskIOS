@@ -28,17 +28,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func initDatabase() {
-        Database.saveCustomer("Oliver", id: "2000024972909", email:"oliver.metz@bertelsmann.de")
-        Database.saveCustomer("Robert", id: "2000024972901", email:"robert.strickmann@bertelsmann.de")
-        Database.saveCustomer("Thomas", id: "102", email:"thomas.hanning@bertelsmann.de")
-        Database.saveCustomer("Johannes", id: "103", email:"johannes.kleeschulte@bertelsmann.de")
-        Database.saveCustomer("Willem", id: "104", email:"willem.terhoerst@bertelsmann.de")
+        
+        Database.saveCustomer("Oliver", id: "1", email:"oliver.metz@bertelsmann.de")
+        Database.saveCustomer("Robert", id: "2", email:"robert.strickmann@bertelsmann.de")
+        Database.saveCustomer("Thomas", id: "3", email:"thomas.hanning@bertelsmann.de")
+        Database.saveCustomer("Johannes", id: "4", email:"johannes.kleeschulte@bertelsmann.de")
+        Database.saveCustomer("Willem", id: "5", email:"willem.terhoerst@bertelsmann.de")
+        Database.saveCustomer("Ilja", id: "6", email:"ilja.wolik@bertelsmann.de")
         // Override point for customization after application launch.
         
-        Database.saveArticle("Snickers", id: "1000", price: 30)
-        Database.saveArticle("Mars", id: "1001", price: 20)
-        Database.saveArticle("Apple", id: "2001", price: 10)
-        Database.saveArticle("Banana", id: "2002", price: 25)
+        
+        Database.saveArticle("Snickers", id: "1000", price: 35)
+        Database.saveArticle("Pickup", id: "1001", price: 50)
+        Database.saveArticle("Knoppers", id: "1002", price: 40)
+        Database.saveArticle("Kitkat", id: "1003", price: 45)
+        Database.saveArticle("Kinder Riegel", id: "1004", price: 35)
+        Database.saveArticle("Frucht Riegel", id: "1005", price: 35)
+        Database.saveArticle("Müsli Riegel", id: "1006", price: 35)
     }
 
     func applicationWillResignActive(application: UIApplication) {

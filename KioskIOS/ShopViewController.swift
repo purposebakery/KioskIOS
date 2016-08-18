@@ -17,20 +17,6 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var table: UITableView!
     
-    //@IBOutlet weak var customerContainer: UIView!
-    //@IBOutlet weak var articleContainer: UIView!
-    
-    // Camera stuff
-    @IBOutlet weak var camera: UIImageView!
-    
-    var captureSession: AVCaptureSession!
-    var captureDevice : AVCaptureDevice?
-    var previewLayer: AVCaptureVideoPreviewLayer!
-    
-    // Speech stuff
-    let synth = AVSpeechSynthesizer()
-    var myUtterance = AVSpeechUtterance(string: "")
-    
     var currentCustomer : Database.Customer?
     
     var customers: [Database.Customer] = []
@@ -51,7 +37,7 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
         table.delegate = self
         
         initNavigation();
-        runCameraSession()
+        //runCameraSession()
         
         loadData()
     }
@@ -89,6 +75,7 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func backButtonPressed(sender: UIBarButtonItem) {
         currentCustomer = nil
         self.navigationItem.leftBarButtonItem = nil
+        self.title = "Shop"
         loadData()
     }
     
@@ -135,119 +122,17 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             buyArticle(currentCustomer!, article: article)
             currentCustomer = nil
+            self.title = "Shop"
             self.navigationItem.leftBarButtonItem = nil
 
         } else {
             let customer = customers[indexPath.row]
             currentCustomer = customer;
+            self.title = customer.name
             self.navigationItem.leftBarButtonItem = backButton
         }
         
         table.reloadData()
-    }
-    
-    func runCameraSession() {
-        
-        do {
-            captureSession = AVCaptureSession()
-            
-            //let videoCaptureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-            let videoCaptureDevice = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
-                .map { $0 as! AVCaptureDevice }
-                .filter { $0.position == .Front}
-                .first!
-            
-            let videoInput: AVCaptureDeviceInput
-            
-            do {
-                videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-            } catch {
-                return
-            }
-            
-            if (captureSession.canAddInput(videoInput)) {
-                captureSession.addInput(videoInput)
-            } else {
-                failed();
-                return;
-            }
-            
-            let metadataOutput = AVCaptureMetadataOutput()
-            
-            if (captureSession.canAddOutput(metadataOutput)) {
-                captureSession.addOutput(metadataOutput)
-                
-                metadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
-                metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeQRCode]
-            } else {
-                failed()
-                return
-            }
-            
-            previewLayer = AVCaptureVideoPreviewLayer(session: captureSession);
-            /*previewLayer.frame = view.layer.bounds;
-            previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-            view.layer.addSublayer(previewLayer);*/
-            
-            let bounds = self.camera.bounds
-            previewLayer.bounds = bounds
-            //previewLayer.bounds = CGRect(0,y:0,width:200,height:200)
-            previewLayer.videoGravity = AVLayerVideoGravityResizeAspect
-            previewLayer.position = CGPointMake(bounds.width / 4, bounds.height/2)//CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds))
-            self.camera.layer.addSublayer(previewLayer!)
-            
-            captureSession.startRunning();
-            
-            
-            //videoCaptureDevice.videoZoomFactor = 1.0
-        } catch {
-            
-        }
-    }
-    
-    func failed() {
-        let ac = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .Alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-        presentViewController(ac, animated: true, completion: nil)
-        captureSession = nil
-    }
-    /*
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if (captureSession.running == false) {
-            captureSession.startRunning();
-        }
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if (captureSession.running == true) {
-            captureSession.stopRunning();
-        }
-    }*/
-    /*
-    override func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
-        */
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
-        
-        //captureSession.stopRunning()
-        
-        if let metadataObject = metadataObjects.first {
-            let readableObject = metadataObject as! AVMetadataMachineReadableCodeObject;
-            foundCode(readableObject.stringValue);
-        }
-    }
-    
-    func foundCode(code: String) {
-        print("Code scanned: " + code)
-        if code.characters.count > 4 {
-            foundCustomer(code)
-        } else {
-            foundArticle(code)
-        }
     }
     
     func createCustomer(code: String) {
@@ -319,89 +204,11 @@ class ShopViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // 4. Present the alert.
         self.presentViewController(alert, animated: true, completion: nil)
     }
-
-    
-    func foundCustomer(code: String) {
-        
-        if currentCustomer != nil {
-            print("customer already set")
-            return
-        }
-        
-        for customer in Database.loadCustomers() {
-            if (customer.id == code) {
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                utterText(customer.name)
-                print("found customer: " + customer.name + " " + customer.id)
-                currentCustomer = customer;
-                self.navigationItem.leftBarButtonItem = backButton
-
-                return
-            }
-        }
-        
-        // if customer not found
-        createCustomer(code)
-    }
-    
-    func foundArticle(code: String) {
-        for article in Database.loadArticles() {
-            if (article.id == code) {
-                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                utterText("one " + article.name)
-                print("found article: " + article.name + " " + article.id)
-                buyArticle(currentCustomer!, article: article)
-                currentCustomer = nil
-                self.navigationItem.leftBarButtonItem = nil
-                //toggleViewVisibility()
-                return
-            }
-        }
-        
-        
-        // if article not found
-        createArticle(code)
-    }
-    
-    func utterText(text : String) {
-        print("utter text: " + text)
-        myUtterance = AVSpeechUtterance(string: text)
-        myUtterance.rate = 0.3
-        synth.speakUtterance(myUtterance)
-    }
     
     func buyArticle(customer: Database.Customer, article: Database.Article){
         print("buy article")
         
         Database.savePurchase(customer, article: article)
         
-    }
-    
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        print("prepareForSegue")
-        if segue.identifier == "initDelegatesCustomer" {
-            print("prepareForSegue: initDelegatesCustomer")
-            let customerViewController = segue.destinationViewController as! ShopCustomerViewController
-            customerViewController.delegate = self
-        }
-    }*/
-    
-    /*
-    func toggleViewVisibility() {
-        print("toggleViewVisibility")
-        customerContainer.hidden = !customerContainer.hidden
-        
-        articleContainer.hidden = !articleContainer.hidden
-    }*/
-    
-    /*
-    func customerSelected(customer: Database.Customer) {
-    
-        print("did select: \(customer.name)")
-        
-        toggleViewVisibility()
-    }*/
-}
+    }}
 
